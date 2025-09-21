@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy National Wife Day — For Vagvedi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-gradient: linear-gradient(180deg,#fff 0%,#fbf7f6 100%);
+      --accent-light: #ffd9c7;
+      --accent-dark: #ff8aa2;
+      --card-bg: #ffffff;
+      --text-color: #14213d;
+      --muted: #6b7280;
+    }
+    *{box-sizing:border-box;}
+    html,body{margin:0;height:100%;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;background:var(--bg-gradient);display:flex;align-items:center;justify-content:center;padding:24px;}
+    .stage{position:relative;width:95%;max-width:980px;min-height:520px;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+    
+    /* background hearts */
+    .bg-hearts{position:absolute;inset:0;pointer-events:none;overflow:hidden;border-radius:18px;z-index:0;}
+    .bg-hearts .h{position:absolute;color:#ff8aa2;opacity:0.12;font-size:12px;animation:slowFloat linear infinite;}
+    @keyframes slowFloat{0%{transform:translateY(100vh) scale(0.8);opacity:0.1}50%{opacity:0.25}100%{transform:translateY(-10vh) scale(1.1);opacity:0.1}}
+    
+    /* envelope centered */
+    .envelope-outer{
+      width:480px;
+      height:300px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%, -50%);
+      perspective:900px;
+      transition:opacity 0.5s ease;
+    }
+    .envelope{width:100%;height:100%;position:relative;cursor:pointer;transform-style:preserve-3d;transition:transform 0.8s ease-in-out;}
+    .envelope.open{transform:rotateY(180deg);}
+    .env-body{position:relative;width:100%;height:100%;border-radius:16px;background:linear-gradient(135deg,var(--accent-light),var(--accent-dark));box-shadow:0 14px 40px rgba(20,33,61,0.15);overflow:hidden;}
+    .env-flap{position:absolute;left:0;right:0;top:0;height:56%;background:linear-gradient(180deg,#fff,rgba(255,255,255,0.92));clip-path:polygon(0 0,100% 0,50% 72%,0 0);transform-origin:top center;transition:transform 0.7s cubic-bezier(.2,.9,.25,1),box-shadow 0.3s;z-index:3;border-radius:16px 16px 0 0;}
+    .open .env-flap{transform:rotateX(-160deg) translateY(-6px);box-shadow:0 28px 40px rgba(20,33,61,0.12);}
+    .env-strip{position:absolute;left:12px;right:12px;bottom:18px;height:36px;background:linear-gradient(90deg,rgba(255,138,162,0.06),rgba(0,0,0,0));border-radius:8px;z-index:2;}
+    
+    /* letter box independent of envelope */
+    .letter-wrap{position:relative;margin-top:20px;width:100%;max-width:960px;pointer-events:none;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.8s ease, transform 0.8s ease;transform:translateY(20px);}
+    .letter-wrap.visible{opacity:1;transform:translateY(0);pointer-events:auto;}
+    .letter-card{width:100%;background:var(--card-bg);border-radius:18px;padding:30px 36px;box-shadow:0 30px 80px rgba(20,33,61,0.12);}
+    .letter-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+    .letter-head h1{font-family:Playfair Display,serif;margin:0;font-size:24px;color:var(--text-color);}
+    .letter-head small{color:var(--muted);font-size:13px;}
+    .letter-content{color:var(--text-color);line-height:1.6;font-size:16px;background:linear-gradient(180deg,rgba(255,250,250,0.6),rgba(255,255,255,0.95));padding:28px;border-radius:12px;box-shadow:inset 0 0 10px rgba(0,0,0,0.03);white-space:normal;}
+    .letter-footer{margin-top:14px;text-align:right;color:var(--muted);font-weight:600;}
+    .letter-heart-layer{position:absolute;inset:0;pointer-events:none;border-radius:16px;overflow:hidden;}
+    .letter-heart{position:absolute;font-size:18px;color:#f15b79;opacity:0.08;transform:translateY(0);animation:slowFloat linear infinite;}
+    .hint{color:var(--muted);font-size:13px;margin-top:10px;text-align:center;}
+    @media(max-width:760px){.envelope-outer{width:360px;height:220px}.letter-card{padding:22px 24px}.letter-content{font-size:15px;padding:20px}}
+  </style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="bg-hearts" id="bgHearts"></div>
+
+  <div class="center-wrap">
+    <div class="envelope-outer" id="envelopeOuter">
+      <div class="envelope" id="envelope">
+        <div class="env-body">
+          <div class="env-flap"></div>
+          <div class="env-strip"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="letter-wrap" id="letterWrap">
+      <div class="letter-card" id="letterCard">
+        <div class="letter-heart-layer" id="letterHearts"></div>
+        <div class="letter-head">
+          <h1>For my lovely Vaguu</h1>
+        </div>
+        <div class="letter-content">
+          <p>Jab se tu meri life mai aayi hai na, sab kuch thoda aur beautiful ho gaya hai 🌸… tu sirf ek pretty face nahi hai, tu ek feeling hai jo har waqt mere saath hai ❤. Tere chashme wale cute expressions, teri aankhon ki honesty aur teri choti si smile jo dil ki saari thakan mita deti hai, bas wahi toh meri jaan hai ✨. Tu meri comfort hai, meri happiness hai and your little gestures make my heart melt every single day❤… par fir bhi, tu hi wo reason hai jiske liye mai har din grateful feel karta hu 🥺❤🐼.</p>
+          <p>Aur haan… aaj ka din thoda aur bhi special lag raha hai ✨. Pata hai kyun? Kyunki duniya celebrate kar rahi hai ek aise din ko jo sirf unke liye banta hai jo dil ke sabse kareeb hote hain 🤍… aur mujhe bas ye hi kehna hai ki agar koi hai jo uss title pe perfectly fit baithti hai, toh wo tu hi hai 💫. Bas issi liye, today is not just another day… it’s our day and Aaj ka din bas ek reminder hai ki tu kitni special hai mere liye.</p>
+          <p style="margin-top:8px;font-weight:600;color:var(--text-color)">So, <strong>Happy National Wife Day</strong> to the most special person in my life ❤🐼✨</p>
+        </div>
+        <div class="letter-footer">— Bala</div>
+      </div>
+    </div>
+
+    <div class="hint">Click the envelope to open</div>
+  </div>
+</div>
+
+<script>
+const stage=document.getElementById('stage');
+const envelope=document.getElementById('envelope');
+const envelopeOuter=document.getElementById('envelopeOuter');
+const letterWrap=document.getElementById('letterWrap');
+const bgHearts=document.getElementById('bgHearts');
+const letterHearts=document.getElementById('letterHearts');
+
+// background hearts
+for(let i=0;i<25;i++){
+  const h=document.createElement('div');
+  h.className='h';
+  h.innerText='❤';
+  h.style.left=Math.random()*98+'%';
+  h.style.top=Math.random()*90+'%';
+  h.style.fontSize=(8+Math.random()*14)+'px';
+  h.style.animationDuration=(8+Math.random()*8)+'s';
+  h.style.animationDelay=Math.random()*-10+'s';
+  bgHearts.appendChild(h);
+}
+
+// letter hearts
+for(let i=0;i<12;i++){
+  const h=document.createElement('div');
+  h.className='letter-heart';
+  h.innerText='❤';
+  h.style.left=Math.random()*90+'%';
+  h.style.top=Math.random()*80+'%';
+  h.style.fontSize=(12+Math.random()*16)+'px';
+  h.style.animationDuration=(10+Math.random()*10)+'s';
+  h.style.animationDelay=Math.random()*-10+'s';
+  letterHearts.appendChild(h);
+}
+
+// envelope click
+envelope.addEventListener('click',()=>{
+  envelopeOuter.style.opacity='0';
+  setTimeout(()=>{letterWrap.classList.add('visible');},500);
+});
+</script>
+</body>
+</html>
